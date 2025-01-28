@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TillApp", "TillApp\TillApp.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TillApp.Server", "TillApp.Server\TillApp.Server.csproj", "{8F7BDAD6-4591-4D59-A951-F72F7819657C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TillApp.Client.WebAssembly", "TillApp.Client.WebAssembly\TillApp.Client.WebAssembly.csproj", "{BB7E2DDB-B04A-486E-8E7E-2CA225FA5C67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8F7BDAD6-4591-4D59-A951-F72F7819657C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F7BDAD6-4591-4D59-A951-F72F7819657C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F7BDAD6-4591-4D59-A951-F72F7819657C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB7E2DDB-B04A-486E-8E7E-2CA225FA5C67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB7E2DDB-B04A-486E-8E7E-2CA225FA5C67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB7E2DDB-B04A-486E-8E7E-2CA225FA5C67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB7E2DDB-B04A-486E-8E7E-2CA225FA5C67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
