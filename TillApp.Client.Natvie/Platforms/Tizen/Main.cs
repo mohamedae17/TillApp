@@ -2,7 +2,7 @@ using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 using System;
 
-namespace TillApp.Client.Native
+namespace TillApp.Client.Natvie
 {
     internal class Program : MauiApplication
     {

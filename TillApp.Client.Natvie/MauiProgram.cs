@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace TillApp.Client.Native
+namespace TillApp.Client.Natvie
 {
     public static class MauiProgram
     {

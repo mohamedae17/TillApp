@@ -1,4 +1,4 @@
-﻿namespace TillApp.Client.Native
+﻿namespace TillApp.Client.Natvie
 {
     public partial class App : Application
     {

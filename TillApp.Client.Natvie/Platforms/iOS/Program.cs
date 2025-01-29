@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace TillApp.Client.Native
+namespace TillApp.Client.Natvie
 {
     public class Program
     {

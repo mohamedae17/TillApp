@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace TillApp.Client.Native
+namespace TillApp.Client.Natvie
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

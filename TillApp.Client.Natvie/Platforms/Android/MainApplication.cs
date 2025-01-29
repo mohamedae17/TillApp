@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace TillApp.Client.Native
+namespace TillApp.Client.Natvie
 {
     [Application]
     public class MainApplication : MauiApplication
