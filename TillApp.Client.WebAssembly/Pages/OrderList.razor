@@ -50,9 +50,9 @@ else
         Orders = await Http.GetFromJsonAsync<List<Order>>("api/orders");
     }
 
-    private async Task MarkAsPaid(int orderId)
+    private async Task MarkAsPaid(int id)
     {
-        // await Http.PutAsync($"api/orders/pay/{orderId}", null);
-        // Orders.RemoveAll(o => o.OrderID == orderId);
+        await Http.PutAsync($"api/orders/pay/{id}", null);
+        Orders.RemoveAll(o => o.OrderID == id);
     }
 }

@@ -22,7 +22,7 @@ namespace TillApp.Server.Controllers
         public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
             _logger.LogInformation("Fetching all orders.");
-            return await _context.Orders.Include(o => o.OrderItems).ToListAsync();
+            return await _context.Orders.Include(o => o.OrderItems).Where(o=>o.IsPaid != true).ToListAsync();
         }
 
         [HttpGet("{id}")]
@@ -97,6 +97,25 @@ namespace TillApp.Server.Controllers
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
             _logger.LogInformation($"Order with ID {id} deleted.");
+
+            return order;
+        }
+
+        [HttpPut("pay/{id}")]
+        public async Task<ActionResult<Order>> PayOrder(int id)
+        {
+            var order = await _context.Orders.Include(o => o.OrderItems)
+                                              .FirstOrDefaultAsync(o => o.OrderID == id);
+
+            if (order == null)
+            {
+                _logger.LogWarning($"Order with ID {id} not found for deletion.");
+                return NotFound();
+            }
+            order.IsPaid = true;
+            _context.Orders.Update(order);
+            await _context.SaveChangesAsync();
+            _logger.LogInformation($"Order with ID {id} Payed.");
 
             return order;
         }
