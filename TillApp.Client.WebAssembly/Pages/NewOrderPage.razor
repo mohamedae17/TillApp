@@ -1,0 +1,76 @@
+﻿@page "/new-order"
+@using TillApp.Shared.Models
+@inject HttpClient Http
+
+<h3>New Order</h3>
+
+<input type="text" @bind="OrderName" placeholder="Enter Order Name" />
+
+<div>
+    @foreach (var item in MenuItems)
+    {
+        <button @onclick="() => AddItem(item.Name, item.Price)">
+            @item.Name - £@item.Price
+        </button>
+    }
+</div>
+
+<h4>Order Items:</h4>
+<ul>
+    @foreach (var item in OrderItems)
+    {
+        <li>@item.ItemName - £@item.Price</li>
+    }
+</ul>
+
+<h4>Total: £@Total</h4>
+
+<button @onclick="PlaceOrder">Place Order</button>
+
+@code {
+    private string OrderName;
+    private List<OrderItem> OrderItems = new();
+    private List<MenuItem> MenuItems = new()
+    {
+        new MenuItem { Name = "Coke", Price = 2.20m },
+        new MenuItem { Name = "Pepsi", Price = 2.00m },
+        new MenuItem { Name = "Burger", Price = 5.50m },
+        new MenuItem { Name = "Fries", Price = 3.00m },
+        new MenuItem { Name = "Pizza", Price = 8.00m },
+        new MenuItem { Name = "Salad", Price = 4.00m },
+        new MenuItem { Name = "Chicken", Price = 7.50m },
+        new MenuItem { Name = "Water", Price = 1.00m },
+        new MenuItem { Name = "Coffee", Price = 2.50m },
+        new MenuItem { Name = "Tea", Price = 1.80m }
+    };
+
+    private decimal Total => OrderItems.Sum(i => i.Price);
+
+    private void AddItem(string name, decimal price)
+    {
+        OrderItems.Add(new OrderItem { ItemName = name, Price = price });
+    }
+
+    private async Task PlaceOrder()
+    {
+        if (string.IsNullOrWhiteSpace(OrderName) || !OrderItems.Any()) return;
+
+        var order = new Order
+            {
+                OrderName = OrderName,
+                OrderItems = OrderItems,
+                Amount = Total,
+                IsPaid = false
+            };
+
+        await Http.PostAsJsonAsync("api/orders", order);
+        OrderName = "";
+        OrderItems.Clear();
+    }
+
+    public class MenuItem
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+    }
+}

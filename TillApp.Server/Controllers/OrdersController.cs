@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TillApp.Server.Models;
+using TillApp.Shared.Models;
 
 namespace TillApp.Server.Controllers
 {
@@ -45,9 +45,10 @@ namespace TillApp.Server.Controllers
         {
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
-            _logger.LogInformation($"Order with ID {order.OrderID} added.");
 
+            _logger.LogInformation($"Order with ID {order.OrderID} added.");
             return CreatedAtAction("GetOrder", new { id = order.OrderID }, order);
+
         }
 
         [HttpPut("{id}")]
