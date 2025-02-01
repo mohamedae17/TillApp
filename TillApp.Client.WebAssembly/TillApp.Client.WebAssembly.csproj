@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -11,8 +11,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.0" PrivateAssets="all" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TillApp.Client.Shared\TillApp.Client.Shared.csproj" />
-  </ItemGroup>
 
+	<ItemGroup>
+	  <Content Remove="..\TillApp.Client.Shared\wwwroot\favicon.png" />
+	  <Content Remove="..\TillApp.Client.Shared\wwwroot\icon-192.png" />
+	  <Content Remove="..\TillApp.Client.Shared\wwwroot\index.html" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\TillApp.Client.Shared\TillApp.Client.Shared.csproj" />
+	</ItemGroup>
 </Project>

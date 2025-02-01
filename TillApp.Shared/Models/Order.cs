@@ -1,4 +1,4 @@
-﻿namespace TillApp.Server.Models
+﻿namespace TillApp.Shared.Models
 {
     public class Order
     {

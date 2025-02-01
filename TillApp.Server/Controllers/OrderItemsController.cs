@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TillApp.Server.Models;
+using TillApp.Shared.Models;
 
 namespace TillApp.Server.Controllers
 {
@@ -23,14 +23,14 @@ namespace TillApp.Server.Controllers
         public async Task<ActionResult<IEnumerable<OrderItem>>> GetOrderItems()
         {
             _logger.LogInformation("Fetching all order items.");
-            return await _context.OrderItems.Include(oi => oi.Order).ToListAsync();
+            return await _context.OrderItems.Include(oi => oi.OrderID).ToListAsync();
         }
 
 
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderItem>> GetOrderItem(int id)
         {
-            var orderItem = await _context.OrderItems.Include(oi => oi.Order)
+            var orderItem = await _context.OrderItems.Include(oi => oi.OrderID)
                                                       .FirstOrDefaultAsync(oi => oi.OrderItemID == id);
 
             if (orderItem == null)
@@ -89,7 +89,7 @@ namespace TillApp.Server.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<OrderItem>> DeleteOrderItem(int id)
         {
-            var orderItem = await _context.OrderItems.Include(oi => oi.Order)
+            var orderItem = await _context.OrderItems.Include(oi => oi.OrderID)
                                                       .FirstOrDefaultAsync(oi => oi.OrderItemID == id);
 
             if (orderItem == null)

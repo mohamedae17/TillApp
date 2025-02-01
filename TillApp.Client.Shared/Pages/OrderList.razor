@@ -1,0 +1,134 @@
+﻿@page "/orders"
+@using TillApp.Shared.Models
+@inject HttpClient Http
+
+<style>
+
+    h3 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #4CAF50;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 16px;
+        color: #666;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    thead {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    th {
+        padding: 12px;
+        text-align: left;
+        font-size: 18px;
+    }
+
+    tbody {
+        background-color: #f9f9f9;
+    }
+
+    td {
+        padding: 12px;
+        font-size: 16px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+
+    button {
+        background-color: #008CBA;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+
+
+        button:hover {
+            background-color: #007B9E;
+        }
+
+
+    table:empty {
+        text-align: center;
+        padding: 20px;
+        font-size: 18px;
+        color: #888;
+    }
+
+</style>
+
+<h3>Unpaid Orders</h3>
+
+@if (Orders == null)
+{
+    <p>Loading...</p>
+}
+else if (!Orders.Any())
+{
+    <p>No unpaid orders available.</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Order Name</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Orders)
+            {
+                <tr>
+                    <td>@order.OrderName</td>
+                    <td>£@order.Amount</td>
+                    <td>
+                        <button @onclick="() => MarkAsPaid(order.OrderID)">Paid</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Order>? Orders;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadOrders();
+    }
+
+    private async Task LoadOrders()
+    {
+        try
+        {
+            Orders = await Http.GetFromJsonAsync<List<Order>>("api/Orders");
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine("error :" + ex);
+        }
+    }
+
+    private async Task MarkAsPaid(int id)
+    {
+        await Http.PutAsync($"api/orders/pay/{id}", null);
+        Orders.RemoveAll(o => o.OrderID == id);
+    }
+}
