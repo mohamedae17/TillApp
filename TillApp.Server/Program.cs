@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -45,9 +46,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
+app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllers();
