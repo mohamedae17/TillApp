@@ -19,9 +19,9 @@ namespace TillApp.Client.Natvie
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddHttpClient("ApiClient", client =>
             {
-                client.BaseAddress = new Uri("https://10.0.2.2:7016/");
+                client.BaseAddress = new Uri("http://10.0.2.2:7016/");
             });
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://10.0.2.2:7016/") });
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://10.0.2.2:7016/") });
 
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
