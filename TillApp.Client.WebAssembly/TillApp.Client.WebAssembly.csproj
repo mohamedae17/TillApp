@@ -21,8 +21,4 @@
 	<ItemGroup>
 		<ProjectReference Include="..\TillApp.Client.Shared\TillApp.Client.Shared.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Pages\" />
-	</ItemGroup>
 </Project>
